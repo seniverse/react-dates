@@ -60,11 +60,23 @@ const defaultProps = {
   monthFormat: 'MMMM YYYY', // english locale
 };
 
+function getMonths(initialMonth, numberOfMonths) {
+  let month = initialMonth.clone().subtract(1, 'month');
+
+  const months = [];
+  for (let i = 0; i < numberOfMonths + 2; i++) {
+    months.push(month);
+    month = month.clone().add(1, 'month');
+  }
+
+  return months;
+}
+
 export default class CalendarMonthGrid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      months: this.getMonths(props.initialMonth, props.numberOfMonths),
+      months: getMonths(props.initialMonth, props.numberOfMonths),
     };
 
     this.isTransitionEndSupported = isTransitionEndSupported();
@@ -113,18 +125,6 @@ export default class CalendarMonthGrid extends React.Component {
 
   onTransitionEnd() {
     this.props.onMonthTransitionEnd();
-  }
-
-  getMonths(initialMonth, numberOfMonths) {
-    let month = initialMonth.clone().subtract(1, 'month');
-
-    const months = [];
-    for (let i = 0; i < numberOfMonths + 2; i++) {
-      months.push(month);
-      month = month.clone().add(1, 'month');
-    }
-
-    return months;
   }
 
   render() {

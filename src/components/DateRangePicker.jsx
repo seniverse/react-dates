@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import shallowCompare from 'react-addons-shallow-compare';
 import moment from 'moment';
 import cx from 'classnames';
 import Portal from 'react-portal';
@@ -84,6 +85,10 @@ export default class DateRangePicker extends React.Component {
   componentDidMount() {
     window.addEventListener('resize', this.responsivizePickerPosition);
     this.responsivizePickerPosition();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
   }
 
   componentWillUnmount() {

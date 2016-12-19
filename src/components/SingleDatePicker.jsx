@@ -2,8 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import cx from 'classnames';
 import Portal from 'react-portal';
-import includes from 'array-includes';
 
+import OutsideClickHandler from './OutsideClickHandler';
 import toMomentObject from '../utils/toMomentObject';
 import toLocalizedDateString from '../utils/toLocalizedDateString';
 import getResponsiveContainerStyles from '../utils/getResponsiveContainerStyles';
@@ -276,7 +276,7 @@ export default class SingleDatePicker extends React.Component {
       selected: day => this.isSelected(day),
     };
 
-    const onOutsideClick = !withFullScreenPortal ? this.onClearFocus : undefined;
+    const onOutsideClick = !withFullScreenPortal && withPortal ? this.onClearFocus : undefined;
 
     return (
       <div
@@ -336,27 +336,31 @@ export default class SingleDatePicker extends React.Component {
 
     const dateString = this.getDateString(date);
 
+    const onOutsideClick = !withPortal && !withFullScreenPortal ? this.onOutsideClick : () => {};
+
     return (
       <div className="SingleDatePicker">
-        <SingleDatePickerInput
-          id={id}
-          placeholder={placeholder}
-          focused={focused}
-          disabled={disabled}
-          required={required}
-          showCaret={!withPortal && !withFullScreenPortal}
-          phrases={phrases}
-          onClearDate={this.clearDate}
-          showClearDate={showClearDate}
-          dateValue={dateString}
-          onChange={this.onChange}
-          onFocus={this.onFocus}
-          onKeyDownShiftTab={this.onClearFocus}
-          onKeyDownTab={this.onClearFocus}
-          border
-        />
+        <OutsideClickHandler onOutsideClick={onOutsideClick}>
+          <SingleDatePickerInput
+            id={id}
+            placeholder={placeholder}
+            focused={focused}
+            disabled={disabled}
+            required={required}
+            showCaret={!withPortal && !withFullScreenPortal}
+            phrases={phrases}
+            onClearDate={this.clearDate}
+            showClearDate={showClearDate}
+            dateValue={dateString}
+            onChange={this.onChange}
+            onFocus={this.onFocus}
+            onKeyDownShiftTab={this.onClearFocus}
+            onKeyDownTab={this.onClearFocus}
+            border
+          />
 
-        {this.maybeRenderDayPickerWithPortal()}
+          {this.maybeRenderDayPickerWithPortal()}
+        </OutsideClickHandler>
       </div>
     );
   }
