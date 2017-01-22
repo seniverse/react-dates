@@ -7,6 +7,7 @@ import cx from 'classnames';
 import OutsideClickHandler from './OutsideClickHandler';
 import CalendarMonthGrid from './CalendarMonthGrid';
 import DayPickerNavigation from './DayPickerNavigation';
+import Button from './Button';
 
 import getTransformStyles from '../utils/getTransformStyles';
 
@@ -465,7 +466,10 @@ export default class DayPicker extends React.Component {
             className="ActionPane">
             <div className="quick-button active">自定义时间</div>
             <div className="button-wrapper">
-              <div className="action-pane-button">确定</div>
+              <Button
+                text="确定"
+                onClick={onOutsideClick}
+              />
             </div>
           </div>
         </OutsideClickHandler>

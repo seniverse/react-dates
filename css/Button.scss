@@ -1,0 +1,65 @@
+@import 'variables';
+
+.datepicker-button {
+  background-color: $react-dates-color-primary;
+  color: $react-dates-color-white;
+  border-radius: 4px;
+  padding: 10px 25px;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  display: flex;
+  transition: box-shadow 0.2s;
+  box-shadow: $btn-shadow;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 4px;
+    background-color: transparent;
+    transition: background-color 0.2s;
+  }
+
+  &:not(.datepicker-button-disabled) {
+    &:hover {
+      box-shadow: $btn-shadow-hover;
+
+      &::before {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    & .datepicker-button-text-wrapper {
+      transform: translateY(0);
+    }
+  }
+}
+
+.datepicker-button-disabled {
+  cursor: not-allowed;
+
+  &::before {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.datepicker-button-text-wrapper {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex: 1;
+}
+
+.datepicker-button-pressDown.datepicker-button-pressDown {
+  transition: none;
+  box-shadow: $btn-shadow-pressed !important;
+
+  & .wrapper {
+    transform: translateY(1px);
+  }
+}
