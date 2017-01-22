@@ -118,19 +118,6 @@ storiesOf('DateRangePicker', module)
       />
     </div>
   ))
-  .addWithInfo('vertical', () => (
-    <DateRangePickerWrapper
-      orientation={VERTICAL_ORIENTATION}
-    />
-  ))
-  .addWithInfo('vertical anchored right', () => (
-    <div style={{ float: 'right' }}>
-      <DateRangePickerWrapper
-        orientation={VERTICAL_ORIENTATION}
-        anchorDirection={ANCHOR_RIGHT}
-      />
-    </div>
-  ))
   .addWithInfo('horizontal with portal', () => (
     <DateRangePickerWrapper
       withPortal
@@ -138,12 +125,6 @@ storiesOf('DateRangePicker', module)
   ))
   .addWithInfo('horizontal with fullscreen portal', () => (
     <DateRangePickerWrapper withFullScreenPortal />
-  ))
-  .addWithInfo('vertical with full screen portal', () => (
-    <DateRangePickerWrapper
-      orientation={VERTICAL_ORIENTATION}
-      withFullScreenPortal
-    />
   ))
   .addWithInfo('with clear dates button', () => (
     <DateRangePickerWrapper
@@ -240,11 +221,12 @@ storiesOf('DateRangePicker', module)
     moment.locale('zh-cn');
     return (
       <DateRangePickerWrapper
+        keepOpenOnDateSelect
         startDatePlaceholderText="起始时间"
         endDatePlaceholderText="结束时间"
         monthFormat="YYYY[年]MMMM"
         isOutsideRange={day =>
-          isInclusivelyAfterDay(day, moment())
+          isInclusivelyAfterDay(day, moment().add(1, 'days'))
         }
       />
     )
@@ -254,11 +236,12 @@ storiesOf('DateRangePicker', module)
     return (
       <DateRangePickerWrapper
         numberOfMonths={1}
+        keepOpenOnDateSelect
         startDatePlaceholderText="起始时间"
         endDatePlaceholderText="结束时间"
         monthFormat="YYYY[年]MMMM"
         isOutsideRange={day =>
-          isInclusivelyAfterDay(day, moment())
+          isInclusivelyAfterDay(day, moment().add(1, 'days'))
         }
       />
     )

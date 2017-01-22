@@ -86,20 +86,25 @@
   align-items: center;
   padding-top: 30px;
 
-  & .quick-button {
+  & .pane-quick-button {
     height: 20px;
     width: 100%;
     line-height: 20px;
-    text-align: center;
+    text-align: left;
+    padding-left: 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
     color: $react-dates-color-gray;
 
     &.active {
+      cursor: default;
+      padding-left: 17px;
       border-left: 3px solid $react-dates-color-primary;
       color: $react-dates-color-primary;
     }
   }
 
-  & .button-wrapper {
+  & .pane-button-wrapper {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -109,7 +114,6 @@
   }
 
   & .action-pane-button {
-    //font-size: 14px;
     background-color: $react-dates-color-primary;
     color: $react-dates-color-white;
     border-radius: 4px;

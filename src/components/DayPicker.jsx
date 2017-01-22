@@ -148,6 +148,7 @@ export default class DayPicker extends React.Component {
 
     this.onPrevMonthClick = this.onPrevMonthClick.bind(this);
     this.onNextMonthClick = this.onNextMonthClick.bind(this);
+    this.choseRecentMonth = this.choseRecentMonth.bind(this);
     this.updateStateAfterMonthTransition = this.updateStateAfterMonthTransition.bind(this);
   }
 
@@ -301,6 +302,16 @@ export default class DayPicker extends React.Component {
     );
   }
 
+  choseRecentMonth() {
+    const { onDatesChange } = this.props;
+    const now = moment();
+    const oneMonthAgo = moment().add(-1, 'months');
+    onDatesChange && onDatesChange({
+      startDate: oneMonthAgo,
+      endDate: now
+    });
+  }
+
   renderNavigation() {
     const {
       navPrev,
@@ -373,6 +384,7 @@ export default class DayPicker extends React.Component {
       onDayMouseLeave,
       onOutsideClick,
       monthFormat,
+      onComplete
     } = this.props;
 
     const numOfWeekHeaders = this.isVertical() ? 1 : numberOfMonths;
@@ -404,8 +416,6 @@ export default class DayPicker extends React.Component {
     // this is a kind of made-up value that generally looks good. we'll
     // probably want to let the user set this explicitly.
     const verticalHeight = 1.75 * CALENDAR_MONTH_WIDTH;
-
-    // console.log(`verticalHeight: ${verticalHeight}`)
 
     const dayPickerStyle = {
       width: this.isHorizontal() && (this.calendarWidth + ACTION_PANE_WIDTH),
@@ -464,11 +474,13 @@ export default class DayPicker extends React.Component {
           <div
             ref={ref => this.actionPane = ref}
             className="ActionPane">
-            <div className="quick-button active">自定义时间</div>
-            <div className="button-wrapper">
+            <div
+              onClick={this.choseRecentMonth}
+              className="pane-quick-button">最近一个月</div>
+            <div className="pane-button-wrapper">
               <Button
                 text="确定"
-                onClick={onOutsideClick}
+                onClick={onComplete}
               />
             </div>
           </div>

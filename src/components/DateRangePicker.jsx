@@ -69,12 +69,16 @@ const defaultProps = {
 export default class DateRangePicker extends React.Component {
   constructor(props) {
     super(props);
+    const { startDate, endDate } = props;
     this.state = {
       dayPickerContainerStyles: {},
+      startDate,
+      endDate
     };
 
     this.isTouchDevice = isTouchDevice();
 
+    this.onComplete = this.onComplete.bind(this);
     this.onOutsideClick = this.onOutsideClick.bind(this);
 
     this.responsivizePickerPosition = this.responsivizePickerPosition.bind(this);
@@ -90,9 +94,27 @@ export default class DateRangePicker extends React.Component {
   }
 
   onOutsideClick() {
+    const { startDate, endDate } = this.state;
+    const { onDatesChange } = this.props;
+    onDatesChange && onDatesChange({
+      startDate,
+      endDate
+    });
+    this.onClearFocus();
+  }
+
+  onComplete() {
+    const { startDate, endDate } = this.props;
+    this.setState({
+      startDate,
+      endDate
+    });
+    this.onClearFocus();
+  }
+
+  onClearFocus() {
     const { focusedInput, onFocusChange } = this.props;
     if (!focusedInput) return;
-
     onFocusChange(null);
   }
 
@@ -222,6 +244,7 @@ export default class DateRangePicker extends React.Component {
           isDayHighlighted={isDayHighlighted}
           isDayBlocked={isDayBlocked}
           keepOpenOnDateSelect={keepOpenOnDateSelect}
+          onComplete={this.onComplete}
         />
 
         {withFullScreenPortal &&
@@ -287,7 +310,6 @@ export default class DateRangePicker extends React.Component {
           onFocusChange={onFocusChange}
           phrases={phrases}
         />
-
         {this.maybeRenderDayPickerWithPortal()}
       </div>
     );
