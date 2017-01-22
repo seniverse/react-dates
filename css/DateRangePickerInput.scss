@@ -2,8 +2,9 @@
 
 .DateRangePickerInput {
   background-color: $react-dates-color-white;
-  border: 1px solid $react-dates-color-gray-lighter;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
   display: inline-block;
+  border-radius: 4px;
 }
 
 .DateRangePickerInput--disabled {
@@ -29,7 +30,6 @@
   font: inherit;
   line-height: normal;
   overflow: visible;
-
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
@@ -48,8 +48,8 @@
   visibility: hidden;
 }
 
-.DateRangePickerInput__clear-dates:focus,
-.DateRangePickerInput__clear-dates--hover {
+.DateRangePickerInput__clear-dates--hover,
+.DateRangePickerInput__clear-dates:focus {
   background: $react-dates-color-border;
   border-radius: 50%;
 }

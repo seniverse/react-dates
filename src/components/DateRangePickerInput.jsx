@@ -139,7 +139,7 @@ export default class DateRangePickerInput extends React.Component {
         />
 
         <div className="DateRangePickerInput__arrow">
-          <RightArrow />
+          —
         </div>
 
         <DateInput

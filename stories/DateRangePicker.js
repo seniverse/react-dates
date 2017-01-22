@@ -165,9 +165,9 @@ storiesOf('DateRangePicker', module)
     moment.locale('zh-cn');
     return (
       <DateRangePickerWrapper
-        showClearDates
-        startDatePlaceholderText="入住日期"
-        endDatePlaceholderText="退房日期"
+        // showClearDates
+        startDatePlaceholderText="开始时间"
+        endDatePlaceholderText="结束时间"
         monthFormat="YYYY[年]MMMM"
         phrases={{
           closeDatePicker: '关闭',
