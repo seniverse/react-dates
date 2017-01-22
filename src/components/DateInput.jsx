@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import moment from 'moment';
 
 import isTouchDevice from '../utils/isTouchDevice';
 
@@ -30,6 +31,10 @@ const defaultProps = {
   onFocus() {},
   onKeyDownShiftTab() {},
   onKeyDownTab() {},
+};
+
+const formatDate = (date) => {
+  return moment(date).format('YYYY/MM/DD');
 };
 
 export default class DateInput extends React.Component {
@@ -96,7 +101,8 @@ export default class DateInput extends React.Component {
       required,
     } = this.props;
 
-    const value = dateValue || dateString;
+    const rawValue = dateValue || dateString;
+    const value = rawValue ? formatDate(rawValue) : '';
 
     return (
       <div

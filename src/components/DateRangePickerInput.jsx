@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import cx from 'classnames';
 
 import DateInput from './DateInput';
-import RightArrow from '../svg/arrow-right.svg';
+import Calendar from '../svg/calendar.svg';
 import CloseButton from '../svg/close.svg';
 
 import { START_DATE, END_DATE } from '../../constants';
@@ -124,6 +124,7 @@ export default class DateRangePickerInput extends React.Component {
           'DateRangePickerInput--disabled': disabled,
         })}
       >
+        <Calendar />
         <DateInput
           id={startDateId}
           placeholder={startDatePlaceholderText}

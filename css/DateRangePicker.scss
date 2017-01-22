@@ -21,6 +21,7 @@
   background-color: $react-dates-color-white;
   position: absolute;
   top: $react-dates-spacing-vertical-picker;
+  border-radius: 4px;
 }
 
 .DateRangePicker__picker--show {
@@ -32,11 +33,11 @@
 }
 
 .DateRangePicker__picker--direction-left {
-    left: 0;
+  left: 0;
 }
 
 .DateRangePicker__picker--direction-right {
-    right: 0;
+  right: 0;
 }
 
 .DateRangePicker__picker--portal {
@@ -61,7 +62,6 @@
   overflow: visible;
   padding: 0;
   cursor: pointer;
-
   position: absolute;
   top: 0;
   right: 0;
@@ -74,8 +74,8 @@
     fill: $react-dates-color-gray-lighter;
   }
 
-  &:hover,
-  &:focus {
+  &:focus,
+  &:hover {
     color: darken(#cacccd, 10%);
     text-decoration: none;
   }
