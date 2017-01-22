@@ -34,9 +34,10 @@
   padding: 15px 0 35px;
   text-align: center;
   // necessary to not hide borders in FF
-  margin-bottom: 2px;
+  margin-bottom: 15px;
 }
 // This order is important.
+
 .CalendarMonth__day {
   border: 1px solid lighten($react-dates-color-border-light, 3);
   padding: 0;

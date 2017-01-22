@@ -8,10 +8,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
-  & svg {
-    margin-left: 10px;
-  }
+  padding-left: 10px;
 }
 
 .DateRangePickerInput--disabled {
@@ -41,7 +38,6 @@
   display: inline-block;
   vertical-align: middle;
   padding: 10px;
-  margin: 0 10px 0 5px;
 }
 
 .DateRangePickerInput__clear-dates svg {
@@ -53,10 +49,4 @@
 
 .DateRangePickerInput__clear-dates--hide {
   visibility: hidden;
-}
-
-.DateRangePickerInput__clear-dates--hover,
-.DateRangePickerInput__clear-dates:focus {
-  background: $react-dates-color-border;
-  border-radius: 50%;
 }

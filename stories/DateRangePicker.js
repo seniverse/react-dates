@@ -165,7 +165,7 @@ storiesOf('DateRangePicker', module)
     moment.locale('zh-cn');
     return (
       <DateRangePickerWrapper
-        // showClearDates
+        showClearDates
         startDatePlaceholderText="开始时间"
         endDatePlaceholderText="结束时间"
         monthFormat="YYYY[年]MMMM"
@@ -240,7 +240,7 @@ storiesOf('DateRangePicker', module)
     moment.locale('zh-cn');
     return (
       <DateRangePickerWrapper
-        startDatePlaceholderText="开始时间"
+        startDatePlaceholderText="起始时间"
         endDatePlaceholderText="结束时间"
         monthFormat="YYYY[年]MMMM"
         isOutsideRange={day =>
@@ -254,7 +254,7 @@ storiesOf('DateRangePicker', module)
     return (
       <DateRangePickerWrapper
         numberOfMonths={1}
-        startDatePlaceholderText="开始时间"
+        startDatePlaceholderText="起始时间"
         endDatePlaceholderText="结束时间"
         monthFormat="YYYY[年]MMMM"
         isOutsideRange={day =>

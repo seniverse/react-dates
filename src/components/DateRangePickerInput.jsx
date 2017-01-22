@@ -157,11 +157,11 @@ export default class DateRangePickerInput extends React.Component {
           onKeyDownTab={onEndDateTab}
         />
 
-        {showClearDates &&
+        {showClearDates && (startDateValue || endDateValue) &&
           <button
             type="button"
             className={cx('DateRangePickerInput__clear-dates', {
-              'DateRangePickerInput__clear-dates--hide': !(startDateValue || endDateValue),
+              // 'DateRangePickerInput__clear-dates--hide': !(startDateValue || endDateValue),
               'DateRangePickerInput__clear-dates--hover': isClearDatesHovered,
             })}
             onMouseEnter={this.onClearDatesMouseEnter}
