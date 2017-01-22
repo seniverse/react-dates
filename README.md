@@ -8,9 +8,14 @@
 
 [![npm badge][npm-badge-png]][package-url]
 
-> An easily internationalizable, mobile-friendly datepicker library for the web.
+> **A React date picker component for thinkpage**
+> 
+> Live demo in: https://thinkpage.github.io/react-dates/
+> 
+> *forked from [airbnb/react-dates](https://github.com/airbnb/react-dates)*
 
-![react-dates in action](https://raw.githubusercontent.com/airbnb/react-dates/master/react-dates-demo.gif)
+
+![react-dates in action](https://raw.githubusercontent.com/airbnb/react-dates/master/react-dates.gif)
 
 ## Live Playground
 
@@ -27,18 +32,18 @@ To run that demo on your own computer:
 ## Getting Started
 #### Install dependencies
 Ensure packages are installed with correct version numbers by running:
-  ```sh
+```sh
   (
     export PKG=react-dates;
     npm info "$PKG" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g; s/ *//g' | xargs npm install --save "$PKG"
   )
-  ```
+```
 
   Which produces and runs a command like:
 
-  ```sh
+```sh
   npm install --save react-dates moment@>=#.## react@>=#.## react-dom@>=#.## react-addons-shallow-compare@>=#.##
-  ```
+```
 
 #### Include component
 ```
@@ -518,7 +523,7 @@ $react-dates-color-primary-dark: $some-other-color-specific-to-my-project;
 [deps-url]: https://david-dm.org/airbnb/react-dates
 [dev-deps-svg]: https://david-dm.org/airbnb/react-dates/dev-status.svg
 [dev-deps-url]: https://david-dm.org/airbnb/react-dates#info=devDependencies
-[npm-badge-png]: https://nodei.co/npm/react-dates.png?downloads=true&stars=true
+[npm-badge-png]: https://nodei.co/npm/react-dates.png?downloads=true&amp;stars=true
 [license-image]: http://img.shields.io/npm/l/react-dates.svg
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/react-dates.svg
