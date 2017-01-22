@@ -36,7 +36,7 @@ export default class OutsideClickHandler extends React.Component {
   }
 
   onOutsideClick(e) {
-    const isDescendantOfRoot = ReactDOM.findDOMNode(this.refs.childNode).contains(e.target);
+    const isDescendantOfRoot = ReactDOM.findDOMNode(this.childNode).contains(e.target);
     if (!isDescendantOfRoot) {
       this.props.onOutsideClick(e);
     }
@@ -44,7 +44,7 @@ export default class OutsideClickHandler extends React.Component {
 
   render() {
     return (
-      <div ref="childNode">
+      <div ref={ref => this.childNode = ref} className="PickerModalWrapper">
         {this.props.children}
       </div>
     );

@@ -10,6 +10,7 @@ const propTypes = {
   navPrev: PropTypes.node,
   navNext: PropTypes.node,
   isVertical: PropTypes.bool,
+  style: PropTypes.object,
 
   onPrevMonthClick: PropTypes.func,
   onNextMonthClick: PropTypes.func,
@@ -18,6 +19,7 @@ const defaultProps = {
   navPrev: null,
   navNext: null,
   isVertical: false,
+  style: {},
 
   onPrevMonthClick() {},
   onNextMonthClick() {},
@@ -25,6 +27,7 @@ const defaultProps = {
 
 export default function DayPickerNavigation(props) {
   const {
+    style,
     navPrev,
     navNext,
     isVertical,
@@ -57,7 +60,7 @@ export default function DayPickerNavigation(props) {
   });
 
   return (
-    <div className={navClassNames}>
+    <div className={navClassNames} style={style}>
       <span
         className={prevClassNames}
         onClick={onPrevMonthClick}

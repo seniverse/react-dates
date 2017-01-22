@@ -16,6 +16,7 @@ import { HORIZONTAL_ORIENTATION, VERTICAL_ORIENTATION } from '../../constants';
 
 const CALENDAR_MONTH_WIDTH = 300;
 const DAY_PICKER_PADDING = 9;
+const ACTION_PANE_WIDTH = 120;
 const MONTH_PADDING = 23;
 const PREV_TRANSITION = 'prev';
 const NEXT_TRANSITION = 'next';
@@ -225,7 +226,7 @@ export default class DayPicker extends React.Component {
 
   getMonthHeightByIndex(i) {
     return getMonthHeight(
-      ReactDOM.findDOMNode(this.refs.transitionContainer).querySelectorAll('.CalendarMonth')[i],
+      ReactDOM.findDOMNode(this.transitionContainer).querySelectorAll('.CalendarMonth')[i],
     );
   }
 
@@ -239,7 +240,7 @@ export default class DayPicker extends React.Component {
 
   initializeDayPickerWidth() {
     this.dayPickerWidth = calculateDimension(
-      ReactDOM.findDOMNode(this.refs.calendarMonthGrid).querySelector('.CalendarMonth'),
+      ReactDOM.findDOMNode(this.calendarMonthGrid).querySelector('.CalendarMonth'),
       'width',
       true,
     );
@@ -257,7 +258,7 @@ export default class DayPicker extends React.Component {
 
     // clear the previous transforms
     applyTransformStyles(
-      ReactDOM.findDOMNode(this.refs.calendarMonthGrid).querySelector('.CalendarMonth'),
+      ReactDOM.findDOMNode(this.calendarMonthGrid).querySelector('.CalendarMonth'),
       'none',
     );
 
@@ -269,7 +270,8 @@ export default class DayPicker extends React.Component {
   }
 
   adjustDayPickerHeight() {
-    const transitionContainer = ReactDOM.findDOMNode(this.refs.transitionContainer);
+    const transitionContainer = ReactDOM.findDOMNode(this.transitionContainer);
+    const actionPane = ReactDOM.findDOMNode(this.actionPane);
     const heights = [];
 
     Array.prototype.forEach.call(transitionContainer.querySelectorAll('.CalendarMonth'), (el) => {
@@ -283,6 +285,7 @@ export default class DayPicker extends React.Component {
     if (newMonthHeight !== calculateDimension(transitionContainer, 'height')) {
       this.monthHeight = newMonthHeight;
       transitionContainer.style.height = `${newMonthHeight}px`;
+      actionPane.style.height = `${newMonthHeight}px`;
     }
   }
 
@@ -291,7 +294,7 @@ export default class DayPicker extends React.Component {
     const transformValue = `${transformType}(-${translationValue}px)`;
 
     applyTransformStyles(
-      ReactDOM.findDOMNode(this.refs.transitionContainer).querySelector('.CalendarMonth'),
+      ReactDOM.findDOMNode(this.transitionContainer).querySelector('.CalendarMonth'),
       transformValue,
       1,
     );
@@ -310,6 +313,9 @@ export default class DayPicker extends React.Component {
         navPrev={navPrev}
         navNext={navNext}
         isVertical={this.isVertical()}
+        style={{
+          width: this.calendarWidth
+        }}
       />
     );
   }
@@ -341,6 +347,11 @@ export default class DayPicker extends React.Component {
         </ul>
       </div>
     );
+  }
+
+  get calendarWidth() {
+    const { numberOfMonths } = this.props;
+    return horizontalWidth = (CALENDAR_MONTH_WIDTH * numberOfMonths) + (2 * DAY_PICKER_PADDING);
   }
 
   render() {
@@ -387,14 +398,16 @@ export default class DayPicker extends React.Component {
       'transition-container--vertical': this.isVertical(),
     });
 
-    const horizontalWidth = (CALENDAR_MONTH_WIDTH * numberOfMonths) + (2 * DAY_PICKER_PADDING);
+    const horizontalWidth = this.calendarWidth;
 
     // this is a kind of made-up value that generally looks good. we'll
     // probably want to let the user set this explicitly.
     const verticalHeight = 1.75 * CALENDAR_MONTH_WIDTH;
 
+    // console.log(`verticalHeight: ${verticalHeight}`)
+
     const dayPickerStyle = {
-      width: this.isHorizontal() && horizontalWidth,
+      width: this.isHorizontal() && (this.calendarWidth + ACTION_PANE_WIDTH),
 
       // These values are to center the datepicker (approximately) on the page
       marginLeft: this.isHorizontal() && withPortal && -horizontalWidth / 2,
@@ -403,7 +416,7 @@ export default class DayPicker extends React.Component {
 
     const transitionContainerStyle = {
       width: this.isHorizontal() && horizontalWidth,
-      height: this.isVertical() && !withPortal && verticalHeight,
+      height: this.isVertical() && !withPortal && verticalHeight
     };
 
     const isCalendarMonthGridAnimating = monthTransition !== null;
@@ -421,11 +434,11 @@ export default class DayPicker extends React.Component {
 
           <div
             className={transitionContainerClasses}
-            ref="transitionContainer"
+            ref={ref => this.transitionContainer = ref}
             style={transitionContainerStyle}
           >
             <CalendarMonthGrid
-              ref="calendarMonthGrid"
+              ref={ref => this.calendarMonthGrid = ref}
               transformValue={transformValue}
               enableOutsideDays={enableOutsideDays}
               firstVisibleMonthIndex={firstVisibleMonthIndex}
@@ -446,6 +459,14 @@ export default class DayPicker extends React.Component {
               onMonthTransitionEnd={this.updateStateAfterMonthTransition}
               monthFormat={monthFormat}
             />
+          </div>
+          <div
+            ref={ref => this.actionPane = ref}
+            className="ActionPane">
+            <div className="quick-button active">自定义时间</div>
+            <div className="button-wrapper">
+              <div className="action-pane-button">确定</div>
+            </div>
           </div>
         </OutsideClickHandler>
       </div>
