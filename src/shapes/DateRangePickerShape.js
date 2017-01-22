@@ -37,6 +37,7 @@ export default {
   onFocusChange: PropTypes.func,
   onPrevMonthClick: PropTypes.func,
   onNextMonthClick: PropTypes.func,
+  onComplete: PropTypes.func,
 
   // i18n
   displayFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),

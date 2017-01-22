@@ -11,11 +11,11 @@ class DateRangePickerWrapper extends React.Component {
       endDate: null,
     };
 
-    this.onDatesChange = this.onDatesChange.bind(this);
+    this.onComplete = this.onComplete.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
   }
 
-  onDatesChange({ startDate, endDate }) {
+  onComplete({ startDate, endDate }) {
     this.setState({ startDate, endDate });
   }
 
@@ -29,7 +29,7 @@ class DateRangePickerWrapper extends React.Component {
       <div>
         <DateRangePicker
           {...this.props}
-          onDatesChange={this.onDatesChange}
+          onComplete={this.onComplete}
           onFocusChange={this.onFocusChange}
           focusedInput={focusedInput}
           startDate={startDate}
