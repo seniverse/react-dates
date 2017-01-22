@@ -9,13 +9,13 @@
 [![npm badge][npm-badge-png]][package-url]
 
 > **A React date picker component for thinkpage**
-> 
+>
 > Live demo in: https://thinkpage.github.io/react-dates/
-> 
+>
 > *forked from [airbnb/react-dates](https://github.com/airbnb/react-dates)*
 
 
-![react-dates in action](https://raw.githubusercontent.com/airbnb/react-dates/master/react-dates.gif)
+![react-dates in action](./react-dates.gif)
 
 ## Live Playground
 
