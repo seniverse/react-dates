@@ -52,7 +52,6 @@ const defaultProps = {
   withPortal: false,
   withFullScreenPortal: false,
 
-  onDatesChange() {},
   onFocusChange() {},
   onPrevMonthClick() {},
   onNextMonthClick() {},
@@ -84,6 +83,7 @@ export default class DateRangePicker extends React.Component {
     this.onComplete = this.onComplete.bind(this);
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onOutsideClick = this.onOutsideClick.bind(this);
+    this.onClearDates = this.onClearDates.bind(this);
 
     this.responsivizePickerPosition = this.responsivizePickerPosition.bind(this);
   }
@@ -115,6 +115,21 @@ export default class DateRangePicker extends React.Component {
       endDate
     });
     this.onClearFocus();
+  }
+
+  onClearDates() {
+    const { reopenPickerOnClearDates, onFocusChange, onComplete } = this.props;
+    const startDate = null, endDate = null;
+    this.onDatesChange({ startDate, endDate });
+    this.initialStartDate = null;
+    this.initialEndDate = null;
+    onComplete && onComplete({
+      startDate,
+      endDate
+    });
+    if (reopenPickerOnClearDates) {
+      onFocusChange(START_DATE);
+    }
   }
 
   onDatesChange({ startDate, endDate }) {
@@ -285,7 +300,6 @@ export default class DateRangePicker extends React.Component {
       withPortal,
       withFullScreenPortal,
       displayFormat,
-      reopenPickerOnClearDates,
       keepOpenOnDateSelect,
       onDatesChange,
       onFocusChange,
@@ -309,13 +323,13 @@ export default class DateRangePicker extends React.Component {
           showCaret={!withPortal && !withFullScreenPortal}
           disabled={disabled}
           required={required}
-          reopenPickerOnClearDates={reopenPickerOnClearDates}
           keepOpenOnDateSelect={keepOpenOnDateSelect}
           isOutsideRange={isOutsideRange}
           withFullScreenPortal={withFullScreenPortal}
           onDatesChange={onDatesChange}
           onFocusChange={onFocusChange}
           phrases={phrases}
+          onClearDates={this.onClearDates}
         />
         {this.maybeRenderDayPickerWithPortal()}
       </div>

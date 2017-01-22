@@ -34,7 +34,7 @@ const defaultProps = {
   required: false,
   showClearDate: false,
   reopenPickerOnClearDate: false,
-  keepOpenOnDateSelect: false,
+  keepOpenOnDateSelect: true,
 
   navPrev: null,
   navNext: null,
@@ -70,9 +70,12 @@ const defaultProps = {
 export default class SingleDatePicker extends React.Component {
   constructor(props) {
     super(props);
+    const { date } = props;
+    this.initialDate = date;
     this.state = {
       dayPickerContainerStyles: {},
       hoverDate: null,
+      date
     };
 
     this.today = moment();
@@ -85,8 +88,30 @@ export default class SingleDatePicker extends React.Component {
     this.onFocus = this.onFocus.bind(this);
     this.onClearFocus = this.onClearFocus.bind(this);
     this.clearDate = this.clearDate.bind(this);
+    this.onComplete = this.onComplete.bind(this);
+    this.onOutsideClick = this.onOutsideClick.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
 
     this.responsivizePickerPosition = this.responsivizePickerPosition.bind(this);
+  }
+
+  onOutsideClick() {
+    this.setState({
+      date: this.initialDate
+    });
+    this.onClearFocus();
+  }
+
+  onComplete() {
+    const { onComplete } = this.props;
+    const { date } = this.state;
+    this.initialDate = date;
+    onComplete && onComplete(date);
+    this.onClearFocus();
+  }
+
+  onDateChange(date) {
+    this.setState({ date });
   }
 
   /* istanbul ignore next */
@@ -105,15 +130,15 @@ export default class SingleDatePicker extends React.Component {
   }
 
   onChange(dateString) {
-    const { isOutsideRange, keepOpenOnDateSelect, onDateChange, onFocusChange } = this.props;
+    const { isOutsideRange, keepOpenOnDateSelect, onFocusChange } = this.props;
     const date = toMomentObject(dateString, this.getDisplayFormat());
 
     const isValid = date && !isOutsideRange(date);
     if (isValid) {
-      onDateChange(date);
+      this.onDateChange(date);
       if (!keepOpenOnDateSelect) onFocusChange({ focused: false });
     } else {
-      onDateChange(null);
+      this.onDateChange(null);
     }
   }
 
@@ -121,7 +146,7 @@ export default class SingleDatePicker extends React.Component {
     if (e) e.preventDefault();
     if (includes(modifiers, 'blocked')) return;
 
-    this.props.onDateChange(day);
+    this.onDateChange(day);
     if (!this.props.keepOpenOnDateSelect) this.props.onFocusChange({ focused: null });
   }
 
@@ -183,8 +208,10 @@ export default class SingleDatePicker extends React.Component {
   }
 
   clearDate() {
-    const { onDateChange, reopenPickerOnClearDate, onFocusChange } = this.props;
-    onDateChange(null);
+    const { reopenPickerOnClearDate, onFocusChange, onComplete } = this.props;
+    this.onDateChange(null);
+    this.initialDate = null;
+    onComplete && onComplete(null);
     if (reopenPickerOnClearDate) {
       onFocusChange({ focused: true });
     }
@@ -224,7 +251,7 @@ export default class SingleDatePicker extends React.Component {
   }
 
   isSelected(day) {
-    return isSameDay(day, this.props.date);
+    return isSameDay(day, this.state.date);
   }
 
   isToday(day) {
@@ -263,7 +290,7 @@ export default class SingleDatePicker extends React.Component {
       focused,
       initialVisibleMonth,
     } = this.props;
-    const { dayPickerContainerStyles } = this.state;
+    const { dayPickerContainerStyles, date } = this.state;
 
     const modifiers = {
       today: day => this.isToday(day),
@@ -276,7 +303,7 @@ export default class SingleDatePicker extends React.Component {
       selected: day => this.isSelected(day),
     };
 
-    const onOutsideClick = !withFullScreenPortal ? this.onClearFocus : undefined;
+    const onOutsideClick = !withFullScreenPortal ? this.onOutsideClick : undefined;
 
     return (
       <div
@@ -302,6 +329,7 @@ export default class SingleDatePicker extends React.Component {
           onOutsideClick={onOutsideClick}
           navPrev={navPrev}
           navNext={navNext}
+          onComplete={this.onComplete}
         />
 
         {withFullScreenPortal &&
@@ -328,11 +356,11 @@ export default class SingleDatePicker extends React.Component {
       disabled,
       required,
       showClearDate,
-      date,
       phrases,
       withPortal,
       withFullScreenPortal,
     } = this.props;
+    const { date } = this.state;
 
     const dateString = this.getDateString(date);
 

@@ -10,11 +10,11 @@ class SingleDatePickerWrapper extends React.Component {
       date: null,
     };
 
-    this.onDateChange = this.onDateChange.bind(this);
+    this.onComplete = this.onComplete.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
   }
 
-  onDateChange(date) {
+  onComplete(date) {
     this.setState({ date });
   }
 
@@ -31,8 +31,8 @@ class SingleDatePickerWrapper extends React.Component {
         id="date_input"
         date={date}
         focused={focused}
-        onDateChange={this.onDateChange}
         onFocusChange={this.onFocusChange}
+        onComplete={this.onComplete}
       />
     );
   }

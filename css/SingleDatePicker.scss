@@ -10,6 +10,8 @@
   background-color: $react-dates-color-white;
   position: absolute;
   top: $react-dates-spacing-vertical-picker;
+  border-radius: $react-dates-border-radius;
+  box-shadow: $modal-box-shadow;
 }
 
 .SingleDatePicker__picker--show {
@@ -50,7 +52,6 @@
   overflow: visible;
   padding: 0;
   cursor: pointer;
-
   position: absolute;
   top: 0;
   right: 0;
@@ -63,8 +64,8 @@
     fill: $react-dates-color-gray-lighter;
   }
 
-  &:hover,
-  &:focus {
+  &:focus,
+  &:hover {
     color: darken(#cacccd, 10%);
     text-decoration: none;
   }

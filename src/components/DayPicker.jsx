@@ -46,6 +46,7 @@ const propTypes = {
   onPrevMonthClick: PropTypes.func,
   onNextMonthClick: PropTypes.func,
   onOutsideClick: PropTypes.func,
+  onComplete: PropTypes.func,
 
   // i18n
   monthFormat: PropTypes.string,
@@ -75,6 +76,7 @@ const defaultProps = {
   onPrevMonthClick() {},
   onNextMonthClick() {},
   onOutsideClick() {},
+  onComplete() {},
 
   // i18n
   monthFormat: 'MMMM YYYY',

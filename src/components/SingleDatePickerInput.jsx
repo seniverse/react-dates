@@ -108,7 +108,7 @@ export default class SingleDatePickerInput extends React.Component {
           onKeyDownTab={onKeyDownTab}
         />
 
-        {showClearDate &&
+        {showClearDate && dateValue &&
           <button
             type="button"
             className={cx('SingleDatePickerInput__clear-date', {

@@ -1,8 +1,9 @@
 @import 'variables';
 
 .SingleDatePickerInput {
+  box-shadow: $input-box-shadow;
+  border-radius: $react-dates-border-radius;
   background-color: $react-dates-color-white;
-  border: 1px solid $react-dates-color-border;
 }
 
 .SingleDatePickerInput__clear-date {
@@ -12,7 +13,6 @@
   font: inherit;
   line-height: normal;
   overflow: visible;
-
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
@@ -31,8 +31,8 @@
   visibility: hidden;
 }
 
-.SingleDatePickerInput__clear-date:focus,
-.SingleDatePickerInput__clear-date--hover {
+.SingleDatePickerInput__clear-date--hover,
+.SingleDatePickerInput__clear-date:focus {
   background: $react-dates-color-border;
   border-radius: 50%;
 }

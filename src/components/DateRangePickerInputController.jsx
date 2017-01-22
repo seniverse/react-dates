@@ -30,7 +30,6 @@ const propTypes = {
   required: PropTypes.bool,
 
   keepOpenOnDateSelect: PropTypes.bool,
-  reopenPickerOnClearDates: PropTypes.bool,
   withFullScreenPortal: PropTypes.bool,
   isOutsideRange: PropTypes.func,
   displayFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
@@ -61,7 +60,6 @@ const defaultProps = {
   required: false,
 
   keepOpenOnDateSelect: false,
-  reopenPickerOnClearDates: false,
   withFullScreenPortal: false,
   isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
   displayFormat: () => moment.localeData().longDateFormat('L'),
@@ -169,11 +167,8 @@ export default class DateRangePickerInputWithHandlers extends React.Component {
   }
 
   clearDates() {
-    const { onDatesChange, reopenPickerOnClearDates, onFocusChange } = this.props;
-    onDatesChange({ startDate: null, endDate: null });
-    if (reopenPickerOnClearDates) {
-      onFocusChange(START_DATE);
-    }
+    const { onClearDates } = this.props;
+    onClearDates && onClearDates();
   }
 
   render() {

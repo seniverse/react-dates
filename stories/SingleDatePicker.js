@@ -68,11 +68,6 @@ storiesOf('SingleDatePicker', module)
       />
     </div>
   ))
-  .addWithInfo('vertical', () => (
-    <SingleDatePickerWrapper
-      orientation={VERTICAL_ORIENTATION}
-    />
-  ))
   .addWithInfo('horizontal with portal', () => (
     <SingleDatePickerWrapper
       withPortal
@@ -80,12 +75,6 @@ storiesOf('SingleDatePicker', module)
   ))
   .addWithInfo('horizontal with fullscreen portal', () => (
     <SingleDatePickerWrapper withFullScreenPortal />
-  ))
-  .addWithInfo('vertical with full screen portal', () => (
-    <SingleDatePickerWrapper
-      orientation={VERTICAL_ORIENTATION}
-      withFullScreenPortal
-    />
   ))
   .addWithInfo('with clear dates button', () => (
     <SingleDatePickerWrapper
