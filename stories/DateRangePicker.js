@@ -235,4 +235,31 @@ storiesOf('DateRangePicker', module)
     <DateRangePickerWrapper
       isDayBlocked={day => moment.weekdays(day.weekday()) === 'Friday'}
     />
-  ));
+  ))
+  .addWithInfo('不能超过当日(展示两个月)', () => {
+    moment.locale('zh-cn');
+    return (
+      <DateRangePickerWrapper
+        startDatePlaceholderText="开始时间"
+        endDatePlaceholderText="结束时间"
+        monthFormat="YYYY[年]MMMM"
+        isOutsideRange={day =>
+          isInclusivelyAfterDay(day, moment())
+        }
+      />
+    )
+  })
+  .addWithInfo('不能超过当日(展示一个月)', () => {
+    moment.locale('zh-cn');
+    return (
+      <DateRangePickerWrapper
+        numberOfMonths={1}
+        startDatePlaceholderText="开始时间"
+        endDatePlaceholderText="结束时间"
+        monthFormat="YYYY[年]MMMM"
+        isOutsideRange={day =>
+          isInclusivelyAfterDay(day, moment())
+        }
+      />
+    )
+  });
