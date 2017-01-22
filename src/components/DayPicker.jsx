@@ -10,6 +10,7 @@ import DayPickerNavigation from './DayPickerNavigation';
 import Button from './Button';
 
 import getTransformStyles from '../utils/getTransformStyles';
+import dateHelper from '../utils/date';
 
 import OrientationShape from '../shapes/OrientationShape';
 
@@ -58,7 +59,7 @@ const defaultProps = {
   withPortal: false,
   hidden: false,
 
-  initialVisibleMonth: () => moment(),
+  initialVisibleMonth: dateHelper.now,
 
   navPrev: null,
   navNext: null,
@@ -141,7 +142,7 @@ export default class DayPicker extends React.Component {
 
     this.hasSetInitialVisibleMonth = !props.hidden;
     this.state = {
-      currentMonth: props.hidden ? moment() : props.initialVisibleMonth(),
+      currentMonth: props.hidden ? dateHelper.now() : props.initialVisibleMonth(),
       monthTransition: null,
       translationValue: 0,
     };
@@ -304,8 +305,8 @@ export default class DayPicker extends React.Component {
 
   choseRecentMonth() {
     const { onDatesChange } = this.props;
-    const now = moment();
-    const oneMonthAgo = moment().add(-1, 'months');
+    const now = dateHelper.now();
+    const oneMonthAgo = dateHelper.month.before(1);
     onDatesChange && onDatesChange({
       startDate: oneMonthAgo,
       endDate: now
@@ -343,7 +344,7 @@ export default class DayPicker extends React.Component {
     for (let i = 0; i < 7; i++) {
       header.push(
         <li key={i}>
-          <small>{moment().weekday(i).format('dd')}</small>
+          <small>{dateHelper.weekday(i)}</small>
         </li>,
       );
     }
@@ -384,7 +385,9 @@ export default class DayPicker extends React.Component {
       onDayMouseLeave,
       onOutsideClick,
       monthFormat,
-      onComplete
+      onComplete,
+      startDate,
+      endDate
     } = this.props;
 
     const numOfWeekHeaders = this.isVertical() ? 1 : numberOfMonths;
@@ -434,6 +437,12 @@ export default class DayPicker extends React.Component {
     const transformType = this.isVertical() ? 'translateY' : 'translateX';
     const transformValue = `${transformType}(${translationValue}px)`;
 
+    const oneMonthAgo = dateHelper.month.before(1);
+    const recentMonthButtonClass = cx(
+      "pane-quick-button",
+      dateHelper.format(startDate) === dateHelper.format(oneMonthAgo) && dateHelper.format(endDate) === dateHelper.format(dateHelper.now()) && "active"
+    );
+
     return (
       <div className={dayPickerClassNames} style={dayPickerStyle} >
         <OutsideClickHandler onOutsideClick={onOutsideClick}>
@@ -476,7 +485,7 @@ export default class DayPicker extends React.Component {
             className="ActionPane">
             <div
               onClick={this.choseRecentMonth}
-              className="pane-quick-button">最近一个月</div>
+              className={recentMonthButtonClass}>最近一个月</div>
             <div className="pane-button-wrapper">
               <Button
                 text="确定"

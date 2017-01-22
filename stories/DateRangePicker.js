@@ -91,6 +91,35 @@ class TestWrapper extends React.Component {
 }
 
 storiesOf('DateRangePicker', module)
+  .addWithInfo('不能超过当日(展示两个月)', () => {
+    moment.locale('zh-cn');
+    return (
+      <DateRangePickerWrapper
+        keepOpenOnDateSelect
+        startDatePlaceholderText="起始时间"
+        endDatePlaceholderText="结束时间"
+        monthFormat="YYYY[年]MMMM"
+        isOutsideRange={day =>
+          isInclusivelyAfterDay(day, moment().add(1, 'days'))
+        }
+      />
+    )
+  })
+  .addWithInfo('不能超过当日(展示一个月)', () => {
+    moment.locale('zh-cn');
+    return (
+      <DateRangePickerWrapper
+        numberOfMonths={1}
+        keepOpenOnDateSelect
+        startDatePlaceholderText="起始时间"
+        endDatePlaceholderText="结束时间"
+        monthFormat="YYYY[年]MMMM"
+        isOutsideRange={day =>
+          isInclusivelyAfterDay(day, moment().add(1, 'days'))
+        }
+      />
+    )
+  })
   .addWithInfo('default', () => (
     <DateRangePickerWrapper />
   ))
@@ -216,33 +245,4 @@ storiesOf('DateRangePicker', module)
     <DateRangePickerWrapper
       isDayBlocked={day => moment.weekdays(day.weekday()) === 'Friday'}
     />
-  ))
-  .addWithInfo('不能超过当日(展示两个月)', () => {
-    moment.locale('zh-cn');
-    return (
-      <DateRangePickerWrapper
-        keepOpenOnDateSelect
-        startDatePlaceholderText="起始时间"
-        endDatePlaceholderText="结束时间"
-        monthFormat="YYYY[年]MMMM"
-        isOutsideRange={day =>
-          isInclusivelyAfterDay(day, moment().add(1, 'days'))
-        }
-      />
-    )
-  })
-  .addWithInfo('不能超过当日(展示一个月)', () => {
-    moment.locale('zh-cn');
-    return (
-      <DateRangePickerWrapper
-        numberOfMonths={1}
-        keepOpenOnDateSelect
-        startDatePlaceholderText="起始时间"
-        endDatePlaceholderText="结束时间"
-        monthFormat="YYYY[年]MMMM"
-        isOutsideRange={day =>
-          isInclusivelyAfterDay(day, moment().add(1, 'days'))
-        }
-      />
-    )
-  });
+  ));
