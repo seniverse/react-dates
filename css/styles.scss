@@ -1,3 +1,4 @@
+@import 'variables';
 @import 'CalendarDay';
 @import 'CalendarMonth';
 @import 'CalendarMonthGrid';
@@ -8,3 +9,14 @@
 @import 'DateRangePickerInput';
 @import 'SingleDatePicker';
 @import 'SingleDatePickerInput';
+
+.DateRangePicker,
+.SingleDatePicker {
+  font-size: $base-text-size-M;
+}
+@media (min-width: 1601px) {
+  .DateRangePicker,
+  .SingleDatePicker {
+    font-size: $base-text-size-L;
+  }
+}

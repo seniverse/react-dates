@@ -8,7 +8,6 @@ body {
 html {
   box-sizing: border-box;
   font-family: Helvetica, "sans-serif";
-  font-size: 14px;
 }
 
 *, *:before, *:after {
