@@ -96,7 +96,7 @@
   &.CalendarMonth__day--hovered,
   &:active {
     background: $react-dates-color-primary-shade-1;
-    border: 1px double $react-dates-color-primary;
+    //border: 1px double $react-dates-color-primary;
   }
 
   &.CalendarMonth__day--last-in-range {

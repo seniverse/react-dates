@@ -103,11 +103,14 @@ export default class SingleDatePicker extends React.Component {
   }
 
   onComplete() {
-    const { onComplete } = this.props;
+    this.onClearFocus();
     const { date } = this.state;
+    if (date === this.initialDate) {
+      return;
+    }
+    const { onComplete } = this.props;
     this.initialDate = date;
     onComplete && onComplete(date);
-    this.onClearFocus();
   }
 
   onDateChange(date) {

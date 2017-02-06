@@ -106,15 +106,18 @@ export default class DateRangePicker extends React.Component {
   }
 
   onComplete() {
-    const { onComplete } = this.props;
+    this.onClearFocus();
     const { startDate, endDate } = this.state;
+    if (startDate === this.initialStartDate && endDate === this.initialEndDate) {
+      return;
+    }
+    const { onComplete } = this.props;
     this.initialStartDate = startDate;
     this.initialEndDate = endDate;
     onComplete && onComplete({
       startDate,
       endDate
     });
-    this.onClearFocus();
   }
 
   onClearDates() {
