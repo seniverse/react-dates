@@ -423,7 +423,7 @@ export default class DayPicker extends React.Component {
     const verticalHeight = 1.75 * CALENDAR_MONTH_WIDTH;
 
     const dayPickerStyle = {
-      width: this.isHorizontal() && (this.calendarWidth + ACTION_PANE_WIDTH),
+      width: this.isHorizontal() && (this.calendarWidth + ACTION_PANE_WIDTH + 10),
 
       // These values are to center the datepicker (approximately) on the page
       marginLeft: this.isHorizontal() && withPortal && -horizontalWidth / 2,

@@ -1,6 +1,6 @@
 {
-  "name": "react-dates",
-  "version": "1.0.0",
+  "name": "thinkpage-react-dates",
+  "version": "1.0.1",
   "description": "A responsive and accessible date range picker component built with React",
   "main": "index.js",
   "scripts": {
@@ -38,14 +38,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/airbnb/react-dates.git"
+    "url": "git@github.com:thinkpage/react-dates.git"
   },
-  "author": "Maja Wichrowska <maja.wichrowska@airbnb.com>",
+  "raw-author": "Maja Wichrowska <maja.wichrowska@airbnb.com>",
+  "author": "thinkpage",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/airbnb/react-dates/issues"
-  },
-  "homepage": "https://github.com/airbnb/react-dates#readme",
+  "homepage": "https://github.com/thinkpage/react-dates",
   "devDependencies": {
     "@kadira/react-storybook-addon-info": "^3.3.0",
     "@kadira/storybook": "^2.35.2",

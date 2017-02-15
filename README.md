@@ -1,4 +1,4 @@
-# react-dates
+# thinkpage-react-dates
 
 > **A React date picker component for thinkpage**
 
@@ -54,6 +54,8 @@ To run that demo on your own computer:
 
 ```javascript
 // example
+
+
 class ExampleComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -86,3 +88,35 @@ export default ExampleComponent;
 - `keepOpenOnDateSelect`: React.PropTypes.bool
 
 该属性代表点击日期之后 Modal 是否自动关闭。鉴于现在需要点击"确定"才能真正的改变日期，此属性已被设置为`true`
+
+## Usage
+
+```bash
+$ npm i react react-addons-shallow-compare --save
+$ npm i thinkpage-react-dates --save
+```
+
+```javascript
+import moment from 'moment';
+import { DateRangePicker } from 'thinkpage-react-dates';
+import 'thinkpage-react-dates/lib/css/_datepicker.css';
+
+moment.locale('zh-cn');
+
+render() {
+  // ...
+  return (
+  	<DateRangePicker
+  		startDate={startDate}
+  		endDate={endDate}
+  		focusedInput={focusedInput}
+  		onComplete={this.onComplete}
+  		onFocusChange={this.onFocusChange}
+  		startDatePlaceholderText="起始时间"
+  		endDatePlaceholderText="结束时间"
+  		monthFormat="YYYY[年]MMMM"
+	/>
+  )
+}
+
+```
