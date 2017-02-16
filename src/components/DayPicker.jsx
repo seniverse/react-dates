@@ -440,10 +440,12 @@ export default class DayPicker extends React.Component {
     const transformValue = `${transformType}(${translationValue}px)`;
 
     const oneMonthAgo = dateHelper.month.before(1);
-    const recentMonthButtonClass = cx(
-      "pane-quick-button",
-      dateHelper.format(startDate) === dateHelper.format(oneMonthAgo) && dateHelper.format(endDate) === dateHelper.format(dateHelper.now()) && "active"
-    );
+
+    const actionButtonActive = dateHelper.format(startDate) === dateHelper.format(oneMonthAgo) && dateHelper.format(endDate) === dateHelper.format(dateHelper.now());
+    const qucikActionClass = cx(
+      "quick-action",
+      actionButtonActive && "active"
+    )
 
     return (
       <div className={dayPickerClassNames} style={dayPickerStyle} >
@@ -485,9 +487,11 @@ export default class DayPicker extends React.Component {
           <div
             ref={ref => this.actionPane = ref}
             className="ActionPane">
-            <div
-              onClick={this.choseRecentMonth}
-              className={recentMonthButtonClass}>最近一个月</div>
+            <div className={qucikActionClass}>
+              <div
+                onClick={this.choseRecentMonth}
+                className="pane-quick-button">最近一个月</div>
+            </div>
             <div className="pane-button-wrapper">
               <Button
                 text="确定"
