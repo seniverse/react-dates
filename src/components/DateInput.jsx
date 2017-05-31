@@ -17,6 +17,7 @@ const propTypes = {
   onFocus: PropTypes.func,
   onKeyDownShiftTab: PropTypes.func,
   onKeyDownTab: PropTypes.func,
+  color: PropTypes.string,
 };
 
 const defaultProps = {
@@ -31,6 +32,7 @@ const defaultProps = {
   onFocus() {},
   onKeyDownShiftTab() {},
   onKeyDownTab() {},
+  color: 'green',
 };
 
 export default class DateInput extends React.Component {
@@ -95,6 +97,7 @@ export default class DateInput extends React.Component {
       onFocus,
       disabled,
       required,
+      color,
     } = this.props;
 
     const rawValue = dateValue || dateString;
@@ -105,6 +108,7 @@ export default class DateInput extends React.Component {
         className={cx('DateInput', {
           'DateInput--with-caret': showCaret && focused,
           'DateInput--disabled': disabled,
+          [color]: true,
         })}
         onClick={onFocus}
       >
@@ -118,7 +122,7 @@ export default class DateInput extends React.Component {
           id={id}
           name={id}
           ref={(ref) => { this.inputRef = ref; }}
-          value={value}
+          value={rawValue}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
           onFocus={onFocus}
@@ -136,7 +140,7 @@ export default class DateInput extends React.Component {
             'DateInput__display-text--disabled': disabled,
           })}
         >
-          {value || placeholder}
+          {rawValue || placeholder}
         </div>
       </div>
     );

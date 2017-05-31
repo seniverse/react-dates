@@ -56,9 +56,11 @@ const propTypes = {
   onPrevMonthClick: PropTypes.func,
   onNextMonthClick: PropTypes.func,
   onOutsideClick: PropTypes.func,
+  onComplete: PropTypes.func,
 
   // i18n
   monthFormat: PropTypes.string,
+  color: PropTypes.string,
 };
 
 const defaultProps = {
@@ -98,9 +100,11 @@ const defaultProps = {
   onPrevMonthClick() {},
   onNextMonthClick() {},
   onOutsideClick() {},
+  onComplete() {},
 
   // i18n
   monthFormat: 'MMMM YYYY',
+  color: 'green',
 };
 
 export default class DayPickerRangeController extends React.Component {
@@ -256,7 +260,8 @@ export default class DayPickerRangeController extends React.Component {
       onDatesChange,
       onComplete,
       startDate,
-      endDate
+      endDate,
+      color,
     } = this.props;
 
     const modifiers = {
@@ -305,6 +310,7 @@ export default class DayPickerRangeController extends React.Component {
         onComplete={onComplete}
         startDate={startDate}
         endDate={endDate}
+        color={color}
       />
     );
   }

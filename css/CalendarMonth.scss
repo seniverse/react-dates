@@ -18,6 +18,47 @@
   }
 }
 
+.CalendarMonth.orange {
+  & .CalendarMonth__day--highlighted-calendar {
+    background: $react-dates-color-highlighted;
+
+    &:active {
+      background: $react-dates-color-secondary-orange;
+    }
+  }
+
+  & .CalendarMonth__day--selected-span {
+    background: $react-dates-color-primary-shade-2-orange;
+    border: 1px double $react-dates-color-primary-shade-1-orange;
+
+    &.CalendarMonth__day--hovered,
+    &:active {
+      background: $react-dates-color-primary-shade-1-orange;
+    }
+
+    &.CalendarMonth__day--last-in-range {
+      border-right: $react-dates-color-primary-orange;
+    }
+  }
+
+  & .CalendarMonth__day--after-hovered-start,
+  & .CalendarMonth__day--hovered-span {
+    background: $react-dates-color-primary-shade-2-orange;
+    border: 1px double $react-dates-color-primary-shade-1-orange;
+  }
+
+  & .CalendarMonth__day--selected,
+  & .CalendarMonth__day--selected-end,
+  & .CalendarMonth__day--selected-start {
+    background: $react-dates-color-primary-orange;
+    border: 1px double $react-dates-color-primary-orange;
+
+    &:active {
+      background: $react-dates-color-primary-orange;
+    }
+  }
+}
+
 .CalendarMonth--horizontal {
   display: inline-block;
   min-height: 100%;

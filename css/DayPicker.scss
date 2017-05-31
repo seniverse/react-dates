@@ -19,6 +19,21 @@
   }
 }
 
+.DayPicker.orange {
+  .ActionPane {
+    & .quick-action {
+      &.active {
+        border-left: 3px solid $react-dates-color-primary-orange;
+        color: $react-dates-color-primary-orange;
+      }
+    }
+
+    & .action-pane-button {
+      background-color: $react-dates-color-primary-orange;
+    }
+  }
+}
+
 .DayPicker--vertical.DayPicker--portal {
   position: initial;
 }

@@ -14,6 +14,13 @@ $caret-top: $react-dates-spacing-vertical-picker - $react-dates-width-tooltip-ar
   vertical-align: middle;
 }
 
+.DateInput.orange {
+  & .DateInput__display-text--focused {
+    background: $react-dates-color-primary-orange;
+    border-color: $react-dates-color-primary-orange;
+  }
+}
+
 .DateInput--with-caret::after,
 .DateInput--with-caret::before {
   content: "";

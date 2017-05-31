@@ -64,6 +64,7 @@ const defaultProps = {
     closeDatePicker: 'Close',
     clearDates: 'Clear Dates',
   },
+  color: 'green',
 };
 
 export default class DateRangePicker extends React.Component {
@@ -75,7 +76,7 @@ export default class DateRangePicker extends React.Component {
     this.state = {
       dayPickerContainerStyles: {},
       startDate,
-      endDate
+      endDate,
     };
 
     this.isTouchDevice = isTouchDevice();
@@ -100,7 +101,7 @@ export default class DateRangePicker extends React.Component {
   onOutsideClick() {
     this.setState({
       startDate: this.initialStartDate,
-      endDate: this.initialEndDate
+      endDate: this.initialEndDate,
     });
     this.onClearFocus();
   }
@@ -114,22 +115,27 @@ export default class DateRangePicker extends React.Component {
     const { onComplete } = this.props;
     this.initialStartDate = startDate;
     this.initialEndDate = endDate;
-    onComplete && onComplete({
-      startDate,
-      endDate
-    });
+    if (onComplete) {
+      onComplete({
+        startDate,
+        endDate,
+      });
+    }
   }
 
   onClearDates() {
     const { reopenPickerOnClearDates, onFocusChange, onComplete } = this.props;
-    const startDate = null, endDate = null;
+    const startDate = null;
+    const endDate = null;
     this.onDatesChange({ startDate, endDate });
     this.initialStartDate = null;
     this.initialEndDate = null;
-    onComplete && onComplete({
-      startDate,
-      endDate
-    });
+    if (onComplete) {
+      onComplete({
+        startDate,
+        endDate,
+      });
+    }
     if (reopenPickerOnClearDates) {
       onFocusChange(START_DATE);
     }
@@ -211,6 +217,7 @@ export default class DateRangePicker extends React.Component {
 
   renderDayPicker() {
     const {
+      color,
       isDayBlocked,
       isDayHighlighted,
       isOutsideRange,
@@ -270,6 +277,7 @@ export default class DateRangePicker extends React.Component {
           isDayBlocked={isDayBlocked}
           keepOpenOnDateSelect={keepOpenOnDateSelect}
           onComplete={this.onComplete}
+          color={color}
         />
 
         {withFullScreenPortal &&
@@ -290,6 +298,7 @@ export default class DateRangePicker extends React.Component {
 
   render() {
     const {
+      color,
       startDateId,
       startDatePlaceholderText,
       endDateId,
@@ -333,6 +342,7 @@ export default class DateRangePicker extends React.Component {
           onFocusChange={onFocusChange}
           phrases={phrases}
           onClearDates={this.onClearDates}
+          color={color}
         />
         {this.maybeRenderDayPickerWithPortal()}
       </div>

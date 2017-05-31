@@ -35,6 +35,7 @@ const propTypes = {
 
   // i18n
   monthFormat: PropTypes.string,
+  color: PropTypes.string,
 };
 
 const defaultProps = {
@@ -58,6 +59,7 @@ const defaultProps = {
 
   // i18n
   monthFormat: 'MMMM YYYY', // english locale
+  color: 'green',
 };
 
 export default class CalendarMonthGrid extends React.Component {
@@ -97,6 +99,7 @@ export default class CalendarMonthGrid extends React.Component {
 
   render() {
     const {
+      color,
       enableOutsideDays,
       firstVisibleMonthIndex,
       initialMonth,
@@ -120,12 +123,13 @@ export default class CalendarMonthGrid extends React.Component {
     let month = initialMonth.clone().subtract(1, 'month');
 
     const months = [];
-    for (let i = 0; i < numberOfMonths + 2; i++) {
+    for (let i = 0; i < numberOfMonths + 2; i += 1) {
       const isVisible =
         (i >= firstVisibleMonthIndex) && (i < firstVisibleMonthIndex + numberOfMonths);
 
       months.push(
         <CalendarMonth
+          color={color}
           key={month.format('MM-YY')}
           month={month}
           isVisible={isVisible}

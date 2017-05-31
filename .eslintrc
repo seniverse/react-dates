@@ -11,7 +11,7 @@
     "react/no-find-dom-node": 1,
     "react/no-string-refs": 1,
     "react/no-unused-prop-types": 1, // TODO: enable
-    "jsx-a11y/no-static-element-interactions": 1, // TODO: enable
-    "no-plusplus": 1, // TODO: enable
+    "jsx-a11y/no-static-element-interactions": 0, // TODO: enable
+    "no-plusplus": 1, // TODO: enable,
   }
 }

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import ReactDOM from 'react-dom';
-import moment from 'moment';
 import cx from 'classnames';
+import momentPropTypes from 'react-moment-proptypes';
 
 import OutsideClickHandler from './OutsideClickHandler';
 import CalendarMonthGrid from './CalendarMonthGrid';
@@ -14,7 +14,10 @@ import dateHelper from '../utils/date';
 
 import OrientationShape from '../shapes/OrientationShape';
 
-import { HORIZONTAL_ORIENTATION, VERTICAL_ORIENTATION } from '../../constants';
+import {
+  HORIZONTAL_ORIENTATION,
+  VERTICAL_ORIENTATION,
+} from '../../constants';
 
 const CALENDAR_MONTH_WIDTH = 300;
 const DAY_PICKER_PADDING = 9;
@@ -24,6 +27,8 @@ const PREV_TRANSITION = 'prev';
 const NEXT_TRANSITION = 'next';
 
 const propTypes = {
+  startDate: momentPropTypes.momentObj,
+  endDate: momentPropTypes.momentObj,
   enableOutsideDays: PropTypes.bool,
   numberOfMonths: PropTypes.number,
   modifiers: PropTypes.object,
@@ -47,12 +52,16 @@ const propTypes = {
   onNextMonthClick: PropTypes.func,
   onOutsideClick: PropTypes.func,
   onComplete: PropTypes.func,
+  onDatesChange: PropTypes.func,
 
   // i18n
   monthFormat: PropTypes.string,
+  color: PropTypes.string,
 };
 
 const defaultProps = {
+  startDate: null,
+  endDate: null,
   enableOutsideDays: false,
   numberOfMonths: 1,
   modifiers: {},
@@ -77,9 +86,11 @@ const defaultProps = {
   onNextMonthClick() {},
   onOutsideClick() {},
   onComplete() {},
+  onDatesChange() {},
 
   // i18n
   monthFormat: 'MMMM YYYY',
+  color: 'green',
 };
 
 function applyTransformStyles(el, transform, opacity = '') {
@@ -309,10 +320,12 @@ export default class DayPicker extends React.Component {
     const { onDatesChange } = this.props;
     const now = dateHelper.now();
     const oneMonthAgo = dateHelper.month.before(1);
-    onDatesChange && onDatesChange({
-      startDate: oneMonthAgo,
-      endDate: now
-    });
+    if (onDatesChange) {
+      onDatesChange({
+        startDate: oneMonthAgo,
+        endDate: now,
+      });
+    }
   }
 
   renderNavigation() {
@@ -329,7 +342,7 @@ export default class DayPicker extends React.Component {
         navNext={navNext}
         isVertical={this.isVertical()}
         style={{
-          width: this.calendarWidth
+          width: this.calendarWidth,
         }}
       />
     );
@@ -343,7 +356,7 @@ export default class DayPicker extends React.Component {
     const style = this.isHorizontal() ? horizontalStyle : {};
 
     const header = [];
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i += 1) {
       header.push(
         <li key={i}>
           <small>{dateHelper.weekday(i)}</small>
@@ -389,12 +402,13 @@ export default class DayPicker extends React.Component {
       monthFormat,
       onComplete,
       startDate,
-      endDate
+      endDate,
+      color,
     } = this.props;
 
     const numOfWeekHeaders = this.isVertical() ? 1 : numberOfMonths;
     const weekHeaders = [];
-    for (let i = 0; i < numOfWeekHeaders; i++) {
+    for (let i = 0; i < numOfWeekHeaders; i += 1) {
       weekHeaders.push(this.renderWeekHeader(i));
     }
 
@@ -409,6 +423,7 @@ export default class DayPicker extends React.Component {
       'DayPicker--horizontal': this.isHorizontal(),
       'DayPicker--vertical': this.isVertical(),
       'DayPicker--portal': withPortal,
+      [color]: true,
     });
 
     const transitionContainerClasses = cx('transition-container', {
@@ -432,7 +447,7 @@ export default class DayPicker extends React.Component {
 
     const transitionContainerStyle = {
       width: this.isHorizontal() && horizontalWidth,
-      height: this.isVertical() && !withPortal && verticalHeight
+      height: this.isVertical() && !withPortal && verticalHeight,
     };
 
     const isCalendarMonthGridAnimating = monthTransition !== null;
@@ -443,9 +458,9 @@ export default class DayPicker extends React.Component {
 
     const actionButtonActive = dateHelper.format(startDate) === dateHelper.format(oneMonthAgo) && dateHelper.format(endDate) === dateHelper.format(dateHelper.now());
     const qucikActionClass = cx(
-      "quick-action",
-      actionButtonActive && "active"
-    )
+      'quick-action',
+      actionButtonActive && 'active',
+    );
 
     return (
       <div className={dayPickerClassNames} style={dayPickerStyle} >
@@ -458,11 +473,12 @@ export default class DayPicker extends React.Component {
 
           <div
             className={transitionContainerClasses}
-            ref={ref => this.transitionContainer = ref}
+            ref={ref => (this.transitionContainer = ref)}
             style={transitionContainerStyle}
           >
             <CalendarMonthGrid
-              ref={ref => this.calendarMonthGrid = ref}
+              color={color}
+              ref={ref => (this.calendarMonthGrid = ref)}
               transformValue={transformValue}
               enableOutsideDays={enableOutsideDays}
               firstVisibleMonthIndex={firstVisibleMonthIndex}
@@ -485,15 +501,20 @@ export default class DayPicker extends React.Component {
             />
           </div>
           <div
-            ref={ref => this.actionPane = ref}
-            className="ActionPane">
+            ref={ref => (this.actionPane = ref)}
+            className="ActionPane"
+          >
             <div className={qucikActionClass}>
               <div
                 onClick={this.choseRecentMonth}
-                className="pane-quick-button">最近一个月</div>
+                className="pane-quick-button"
+              >
+                最近一个月
+              </div>
             </div>
             <div className="pane-button-wrapper">
               <Button
+                color={color}
                 text="确定"
                 onClick={onComplete}
               />

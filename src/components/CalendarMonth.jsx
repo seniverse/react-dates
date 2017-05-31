@@ -30,6 +30,8 @@ const propTypes = {
 
   // i18n
   monthFormat: PropTypes.string,
+
+  color: PropTypes.string,
 };
 
 const defaultProps = {
@@ -49,6 +51,8 @@ const defaultProps = {
 
   // i18n
   monthFormat: 'MMMM YYYY', // english locale
+
+  color: 'green',
 };
 
 export function getModifiersForDay(modifiers, day) {
@@ -71,12 +75,14 @@ export default function CalendarMonth(props) {
     onDayTouchStart,
     onDayTouchEnd,
     onDayTouchTap,
+    color,
   } = props;
   const monthTitle = month.format(monthFormat);
 
   const calendarMonthClasses = cx('CalendarMonth', {
     'CalendarMonth--horizontal': orientation === HORIZONTAL_ORIENTATION,
     'CalendarMonth--vertical': orientation === VERTICAL_ORIENTATION,
+    [color]: true,
   });
 
   return (

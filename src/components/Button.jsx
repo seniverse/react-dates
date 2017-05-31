@@ -5,8 +5,8 @@ class Button extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pressDown: false
-    }
+      pressDown: false,
+    };
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
   }
@@ -21,11 +21,12 @@ class Button extends React.Component {
 
   render() {
     const { pressDown } = this.state;
-    const { text, onClick, disabled } = this.props;
+    const { text, onClick, disabled, color } = this.props;
     const buttonClass = cx(
       'datepicker-button',
       disabled && 'datepicker-button-disabled',
-      !disabled && pressDown && 'datepicker-button-pressDown'
+      !disabled && pressDown && 'datepicker-button-pressDown',
+      color,
     );
     const clickFunc = disabled ? () => {} : onClick;
     return (
@@ -35,25 +36,28 @@ class Button extends React.Component {
         onMouseLeave={this.onMouseUp}
         onMouseUp={this.onMouseUp}
         onClick={clickFunc}
-        className={buttonClass}>
+        className={buttonClass}
+      >
         <div className="datepicker-button-text-wrapper">
           {text}
         </div>
       </div>
-    )
+    );
   }
 }
 
 Button.propTypes = {
   text: PropTypes.string,
   disabled: PropTypes.bool,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  color: PropTypes.string,
 };
 
 Button.defaultProps = {
   text: '',
   disabled: false,
-  onClick: () => {}
+  onClick: () => {},
+  color: 'green',
 };
 
 export default Button;

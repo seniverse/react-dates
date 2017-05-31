@@ -120,8 +120,11 @@ storiesOf('DateRangePicker', module)
       />
     )
   })
-  .addWithInfo('default', () => (
+  .addWithInfo('default (green)', () => (
     <DateRangePickerWrapper />
+  ))
+  .addWithInfo('default (orange)', () => (
+    <DateRangePickerWrapper color="orange" />
   ))
   .addWithInfo('hidden with display: none', () => (
     <TestWrapper />

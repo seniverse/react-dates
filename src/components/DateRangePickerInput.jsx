@@ -36,6 +36,7 @@ const propTypes = {
   phrases: PropTypes.shape({
     clearDates: PropTypes.node,
   }),
+  color: PropTypes.string,
 };
 
 const defaultProps = {
@@ -65,6 +66,7 @@ const defaultProps = {
   phrases: {
     clearDates: 'Clear Dates',
   },
+  color: 'green',
 };
 
 export default class DateRangePickerInput extends React.Component {
@@ -113,6 +115,7 @@ export default class DateRangePickerInput extends React.Component {
       required,
       showCaret,
       phrases,
+      color,
     } = this.props;
 
     const startDateValue = startDate || startDateString;
@@ -137,6 +140,7 @@ export default class DateRangePickerInput extends React.Component {
           onChange={onStartDateChange}
           onFocus={onStartDateFocus}
           onKeyDownShiftTab={onStartDateShiftTab}
+          color={color}
         />
 
         <div className="DateRangePickerInput__arrow">
@@ -155,6 +159,7 @@ export default class DateRangePickerInput extends React.Component {
           onChange={onEndDateChange}
           onFocus={onEndDateFocus}
           onKeyDownTab={onEndDateTab}
+          color={color}
         />
 
         {showClearDates && (startDateValue || endDateValue) &&
