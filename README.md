@@ -1,8 +1,8 @@
 # thinkpage-react-dates
 
-> **A React date picker component for thinkpage**
+> **A React date picker component for seniverse**
 
-> 线上 DEMO: [thinkpage.github.io/react-dates](https://thinkpage.github.io/react-dates/)
+> 线上 DEMO: [seniverse.github.io/react-dates](https://seniverse.github.io/react-dates/)
 
 > _forked from [airbnb/react-dates](https://github.com/airbnb/react-dates)_
 
@@ -10,7 +10,7 @@
 
 ## Live Playground
 
-For examples of the datepicker in action, go to [thinkpage.github.io/react-dates](https://thinkpage.github.io/react-dates/)
+For examples of the datepicker in action, go to [seniverse.github.io/react-dates](https://seniverse.github.io/react-dates/)
 
 OR
 
