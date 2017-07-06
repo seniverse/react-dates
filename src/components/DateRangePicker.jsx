@@ -98,8 +98,8 @@ export default class DateRangePicker extends React.Component {
     const {
       startDate,
       endDate,
-    } = this.state;
-    if (nextProps.startDate !== startDate || nextProps.endDate !== endDate) {
+    } = nextProps;
+    if (this.props.startDate !== startDate || this.props.endDate !== endDate) {
       this.initialStartDate = startDate;
       this.initialEndDate = endDate;
       this.setState({
