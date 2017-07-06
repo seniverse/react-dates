@@ -103,7 +103,7 @@ storiesOf('DateRangePicker', module)
           isInclusivelyAfterDay(day, moment().add(1, 'days'))
         }
       />
-    )
+    );
   })
   .addWithInfo('不能超过当日(展示一个月)', () => {
     moment.locale('zh-cn');

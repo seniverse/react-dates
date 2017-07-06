@@ -94,6 +94,21 @@ export default class DateRangePicker extends React.Component {
     this.responsivizePickerPosition();
   }
 
+  componentWillUpdate(nextProps) {
+    const {
+      startDate,
+      endDate,
+    } = this.state;
+    if (nextProps.startDate !== startDate || nextProps.endDate !== endDate) {
+      this.initialStartDate = startDate;
+      this.initialEndDate = endDate;
+      this.setState({
+        startDate,
+        endDate,
+      });
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.responsivizePickerPosition);
   }
