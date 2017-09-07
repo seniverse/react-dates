@@ -1,6 +1,6 @@
 {
   "name": "thinkpage-react-dates",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A responsive and accessible date range picker component built with React",
   "main": "index.js",
   "scripts": {
