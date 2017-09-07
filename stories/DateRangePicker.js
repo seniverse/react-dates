@@ -118,7 +118,23 @@ storiesOf('DateRangePicker', module)
           isInclusivelyAfterDay(day, moment().add(1, 'days'))
         }
       />
-    )
+    );
+  })
+  .addWithInfo('改变主题色', () => {
+    moment.locale('zh-cn');
+    return (
+      <DateRangePickerWrapper
+        numberOfMonths={1}
+        keepOpenOnDateSelect
+        startDatePlaceholderText="起始时间"
+        endDatePlaceholderText="结束时间"
+        monthFormat="YYYY[年]MMMM"
+        color="grey"
+        isOutsideRange={day =>
+          isInclusivelyAfterDay(day, moment().add(1, 'days'))
+        }
+      />
+    );
   })
   .addWithInfo('default (green)', () => (
     <DateRangePickerWrapper />

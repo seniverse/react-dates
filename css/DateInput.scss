@@ -21,6 +21,13 @@ $caret-top: $react-dates-spacing-vertical-picker - $react-dates-width-tooltip-ar
   }
 }
 
+.DateInput.grey {
+  & .DateInput__display-text--focused {
+    background: $react-dates-color-primary-grey;
+    border-color: $react-dates-color-primary-grey;
+  }
+}
+
 .DateInput--with-caret::after,
 .DateInput--with-caret::before {
   content: "";

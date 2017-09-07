@@ -12,6 +12,10 @@
   transition: box-shadow 0.2s;
   box-shadow: $btn-shadow;
 
+  &.grey {
+    background-color: $react-dates-color-primary-grey;
+  }
+
   &.orange {
     background-color: $react-dates-color-primary-orange;
   }
